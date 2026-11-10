@@ -74,7 +74,6 @@
       margin-top: 10px;
     }
 
-    /* Estilização customizada para upload de imagem */
     .file-label {
       display: inline-flex;
       align-items: center;
@@ -114,7 +113,8 @@
       background-color: #2563eb;
     }
 
-    .post-card {
+    /* Estilização base do Card de Postagem */
+    .post-card, article {
       background: #ffffff;
       padding: 20px;
       border-radius: 12px;
@@ -122,6 +122,14 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
       margin-bottom: 16px;
       animation: fadeIn 0.25s ease-out;
+      /* Transição suave para o efeito :hover */
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    /* Requisitos 1 e 2: Aumento de tamanho (scale) e sombra mais intensa no hover */
+    .post-card:hover, article:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
     }
 
     @keyframes fadeIn {
@@ -208,6 +216,49 @@
       color: #ef4444;
       background: #fef2f2;
     }
+
+    /* Requisito 3: Ajustes para Modo Escuro */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #0f172a;
+        color: #f8fafc;
+      }
+
+      header {
+        border-bottom-color: #334155;
+      }
+
+      header h1 {
+        color: #f8fafc;
+      }
+
+      .post-form {
+        background: #1e293b;
+        border-color: #334155;
+      }
+
+      textarea {
+        background: #0f172a;
+        border-color: #334155;
+        color: #f8fafc;
+      }
+
+      .post-card, article {
+        background: #1e293b;
+        border-color: #334155;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      }
+
+      .post-content {
+        color: #cbd5e1;
+      }
+
+      /* Sombra azul brilhante no hover para dar destaque no fundo escuro */
+      .post-card:hover, article:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+      }
+    }
   </style>
 </head>
 <body>
@@ -259,7 +310,7 @@
 
     function adicionarPostAoFeed(texto, imagemSrc) {
       const feed = document.getElementById('postsFeed');
-      const novoPost = document.createElement('div');
+      const novoPost = document.createElement('article');
       novoPost.className = 'post-card';
 
       let htmlConteudo = '';
